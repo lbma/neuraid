@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">GPACalculator!</string>
+    <string name="app_name">GPA Calculator</string>
+    <string name="course">Name of Course</string>
+    <string name="credit">Credits</string>
+    <string-array name="grade">
+        <item>"A"</item>
+        <item>"B"</item>
+        <item>"C"</item>
+        <item>"D"</item>
+        <item>"F"</item>
+    </string-array>
+    <string name="more">Add Courses</string>
+    <string name="GPA">GPA</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Submit">Submit</string>
+    
+    
+    
+
+</resources>
