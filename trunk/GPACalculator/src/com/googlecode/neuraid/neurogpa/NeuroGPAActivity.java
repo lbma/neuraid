@@ -35,25 +35,29 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		// Creating the Array List variable
 		private ArrayList<Course> items;
 		
-		// connects the items (courses) from the array list with the view
+		// initializes the items (courses) from the array list for the view
 		public CourseAdapter(Context context, int textViewResourceId, ArrayList<Course> items) {
 			super(context, textViewResourceId, items);
 			this.items = items;
 		}
 
-		// The Dialog Box that contains Name, Course, and Credit 
+		// The List Entry that contains Name, Course, and Credit 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View v = convertView;
+         // Create view if not there already
 			if (v == null) {
 				LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = vi.inflate(R.layout.row, null);
 			}
+         
+         // find item based on position in list
 			Course o = items.get(position);
 			if (o != null) {
 				TextView tt = (TextView) v.findViewById(R.id.toptext);
 				TextView mt = (TextView) v.findViewById(R.id.middletext);
 				TextView bt = (TextView) v.findViewById(R.id.bottomtext);
+            // set the view to display information from the Course object
 				if(tt != null) {
 					tt.setText("Name: " + o.getName());                            
 				}
@@ -72,27 +76,27 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 	/** Called when the activity is first created. */
 
 	public void onCreate(Bundle savedInstanceState) {
-		// Constructor
+		// Constructorish
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 
-		// Makes a Button 
+		// Initialize a Button 
 		B1 = (Button) findViewById(R.id.B1);
-		// Make it wait for the Button to be pressed
+		// Set up reaction when the Button to be pressed
 		B1.setOnClickListener(this);
 		
-		// Locate the Array containing the courses and the Text containing the GPA in the main view
+		// Initialize the ListView containing the courses and the Text containing the GPA in the main view
 		courseList = (ListView) findViewById(R.id.coursesArray);
 		gradeNumber = (TextView) findViewById(R.id.gpanumber);
 
-		// Makes the array containing the courses into a variable
+		// Initialize the array containing the courses into a variable
 		courses = new ArrayList<Course>();
 		/* courses.add(new Course("English101",4,"A"));
 	        courses.add(new Course("Math101",3,"C"));
 	        courses.add(new Course("Science101",4,"B"));
 		 */
 		
-		// Makes the course adapter into a variable 
+		// Initialize the course adapter into a variable and setting up connection between ArrayList and ListView
 		ca = new CourseAdapter(this,R.layout.row,courses);
 		courseList.setAdapter(ca);
 		recalculateGPA();
@@ -101,7 +105,7 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 
 
 	public void onClick(View arg0) {
-		// Makes the app able to support other models
+		// When button is clicked, show entry dialog
 		FragmentManager fm = getSupportFragmentManager();
 		CourseEntryDialog ceDialog = new CourseEntryDialog();
 		ceDialog.show(fm, "fragment_edit_name");	
@@ -149,9 +153,9 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 
 	// Creates a method that need the input of the name, credit, and grade.  
 	public void addCourse(String name, int credit, String grade) {
-		// Creates a new object called Course and adds it to another course
+		// Creates a new object called Course and adds it to the array
 		courses.add(new Course(name, credit, grade));
-		// Refreshes the array containing the courses in the view
+		// Refreshes the ListView containing the courses in the view via the adapter
 		ca.notifyDataSetChanged();
 		// Recalculates the GPA 
 		recalculateGPA();
