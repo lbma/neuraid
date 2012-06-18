@@ -1,11 +1,180 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    >
-   <ScrollView android:layout_width="fill_parent" android:id="@+id/scrollView1" android:fadeScrollbars="true" android:scrollbars="vertical" android:layout_height="wrap_content" android:layout_weight="1.00">
-            <TextView android:id="@+id/textView1" android:layout_width="fill_parent" android:text="TextView" android:layout_height="fill_parent"></TextView>
-    </ScrollView>
-    <Button android:layout_width="fill_parent" android:layout_height="wrap_content" android:id="@+id/button1" android:text="Connect" android:onClick="doStuff"></Button>
+    android:orientation="vertical" >
+
+    <TableLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.00" >
+
+        <TableRow
+            android:id="@+id/poorRow1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/poortextView1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/poorView1"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/rawRow2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/rawtextView2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/rawView2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/heartRow3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/hearttextView3"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/heartView3"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/attentionRow4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/attentiontextView4"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" />
+
+            <TextView
+                android:id="@+id/attentionView4"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/meditationRow5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/meditationtextView5"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/meditationView5"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/blinkRow6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/blinktextView6"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/blinkView6"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/rawCountRow7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+
+            <TextView
+                android:id="@+id/rawCounttextView7"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/rawCountView7"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:layout_weight="1"
+                android:text="TextView" >
+            </TextView>
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/lowBatteryRow8"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" >
+        </TableRow>
+    </TableLayout>
+
+    <Button
+        android:id="@+id/button1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:onClick="doStuff"
+        android:text="Find Headset" >
+    </Button>
+
 </LinearLayout>
