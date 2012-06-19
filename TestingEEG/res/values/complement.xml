@@ -2,4 +2,5 @@
 <resources>
     <color name="green99">#ff149467</color>
     <color name="orange99">#ffDD5C1E</color>
+    <color name="black">#000000</color>
 </resources>
