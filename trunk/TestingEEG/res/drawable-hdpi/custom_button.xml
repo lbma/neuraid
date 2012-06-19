@@ -14,10 +14,10 @@
             <corners 
                 android:radius="3dp" /> 
             <padding 
-                android:left="10dp" 
-                android:top="10dp" 
-                android:right="10dp" 
-                android:bottom="10dp" /> 
+                android:left="15dp" 
+                android:top="15dp" 
+                android:right="15dp" 
+                android:bottom="15dp" /> 
         </shape> 
     </item> 
  
@@ -33,10 +33,10 @@
             <corners 
                 android:radius="3dp" /> 
             <padding 
-                android:left="10dp" 
-                android:top="10dp" 
-                android:right="10dp" 
-                android:bottom="10dp" /> 
+                android:left="15dp" 
+                android:top="15dp" 
+                android:right="15dp" 
+                android:bottom="15dp" /> 
         </shape> 
     </item> 
  
@@ -50,12 +50,12 @@
                 android:width="3dp" 
                 android:color="@color/grey05" /> 
             <corners 
-                android:radius="3dp" /> 
+                android:radius="100dp" /> 
             <padding 
-                android:left="10dp" 
-                android:top="10dp" 
-                android:right="10dp" 
-                android:bottom="10dp" /> 
+                android:left="15dp" 
+                android:top="15dp" 
+                android:right="15dp" 
+                android:bottom="15dp" /> 
         </shape> 
     </item> 
 </selector> 
