@@ -88,6 +88,7 @@ public class TestingEEGActivity extends Activity {
 		//tvcs = (TextView)findViewById(R.id.tvcs);
 		
 		b = (Button)findViewById(R.id.button1);
+		b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 		
 		
 		
