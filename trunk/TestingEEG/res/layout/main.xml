@@ -1,183 +1,173 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/FrameLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/smog"
-    android:orientation="vertical" >
+    android:background="@color/smog" >
 
-    <TableLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_weight="1.01" >
+    <LinearLayout
+        android:id="@+id/LinearLayout1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
 
-        <TableRow
-            android:id="@+id/poorRow1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+        <TableLayout
+            android:layout_width="171dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_weight="7.67" >
 
-            <TextView
-                android:id="@+id/poortextView1"
+            <TableRow
+                android:id="@+id/poorRow1"
                 android:layout_width="wrap_content"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/back"
-                android:gravity="right"
-                android:text="TextView"
-                android:textColor="@color/black" />
+                android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/poorView1"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:background="@drawable/back"
-                android:layout_weight="1"
-                android:textColor="@color/black" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/poortextView1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:gravity="right"
+                    android:text=" Noise "
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
 
-        <TableRow
-            android:id="@+id/rawRow2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+                <TextView
+                    android:id="@+id/poorView1"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:textColor="@color/black" >
+                </TextView>
+            </TableRow>
 
-            <TextView
-                android:id="@+id/rawtextView2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/back"
-                android:gravity="right"
-                android:text="TextView"
-                android:textColor="@color/black" />
+            <TableRow
+                android:id="@+id/rawRow2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/rawView2"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/back"
-                android:textColor="@color/smog" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/rawtextView2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:gravity="right"
+                    android:text=" Raw "
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
 
-        <TableRow
-            android:id="@+id/heartRow3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+                <TextView
+                    android:id="@+id/rawView2"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:textColor="@color/smog" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/hearttextView3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/back"
-                android:gravity="right"
-                android:text="TextView"
-                android:textColor="@color/black" />
+            <TableRow
+                android:id="@+id/heartRow3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/heartView3"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:textColor="@color/black" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/hearttextView3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:gravity="right"
+                    android:text=" Heart Rate "
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
 
-        <TableRow
-            android:id="@+id/attentionRow4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+                <TextView
+                    android:id="@+id/heartView3"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:textColor="@color/black" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/attentiontextView4"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/back"
-                android:gravity="right"
-                android:text="TextView"
-                android:textColor="@color/black" />
+            <TableRow
+                android:id="@+id/attentionRow4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/attentionView4"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/back"
-                android:textColor="@color/black" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/attentiontextView4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:gravity="right"
+                    android:text=" Attention "
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
 
-        <TableRow
-            android:id="@+id/meditationRow5"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+                <TextView
+                    android:id="@+id/attentionView4"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:textColor="@color/black" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/meditationtextView5"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:background="@drawable/back"
-                android:text="TextView"
-                android:textColor="@color/black" />
+            <TableRow
+                android:id="@+id/meditationRow5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/meditationView5"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/back"
-                android:textColor="@color/black" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/meditationtextView5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:gravity="right"
+                    android:text=" Meditation "
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
 
-        <TableRow
-            android:id="@+id/blinkRow6"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+                <TextView
+                    android:id="@+id/meditationView5"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:textColor="@color/black" />
+            </TableRow>
 
-            <TextView
-                android:id="@+id/blinktextView6"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:background="@drawable/back"
-                android:text="TextView"
-                android:textColor="@color/black" />
+            <TableRow
+                android:id="@+id/blinkRow6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" >
 
-            <TextView
-                android:id="@+id/blinkView6"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/back"
-                android:textColor="@color/black" />
-        </TableRow>
+                <TextView
+                    android:id="@+id/blinktextView6"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:gravity="right"
+                    android:text=" Blink "
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
 
-        <TableRow
-            android:id="@+id/rawCountRow7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
-
-            <TextView
-                android:id="@+id/rawCounttextView7"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:gravity="right"
-                android:background="@drawable/back"
-                android:text="TextView"
-                android:textColor="@color/black" />
-
-            <TextView
-                android:id="@+id/rawCountView7"
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:layout_weight="1"
-                android:background="@drawable/back"
-                android:textColor="@color/black" />
-        </TableRow>
-    </TableLayout>
+                <TextView
+                    android:id="@+id/blinkView6"
+                    android:layout_width="fill_parent"
+                    android:layout_height="fill_parent"
+                    android:layout_weight="1"
+                    android:background="@drawable/back"
+                    android:textColor="@color/black" />
+            </TableRow>
+        </TableLayout>
     <com.androidplot.xy.XYPlot
     android:id="@+id/mySimpleXYPlot"
     android:layout_width="fill_parent"
@@ -186,13 +176,15 @@
     android:layout_marginLeft="10px"
     android:layout_marginRight="10px"
     title="A Simple XYPlot Example"/>
-    
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:onClick="doStuff"
-        android:text="Find Headset"
-        android:background="@drawable/custom_button" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/button1"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            android:background="@drawable/custom_button"
+            android:onClick="doStuff"
+            android:text="Find Headset" />
+    </LinearLayout>
+
+</FrameLayout>
