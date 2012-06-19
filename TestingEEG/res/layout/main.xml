@@ -178,7 +178,15 @@
                 android:textColor="@color/black" />
         </TableRow>
     </TableLayout>
-
+    <com.androidplot.xy.XYPlot
+    android:id="@+id/mySimpleXYPlot"
+    android:layout_width="fill_parent"
+    android:layout_height="200px"
+    android:layout_marginTop="10px"
+    android:layout_marginLeft="10px"
+    android:layout_marginRight="10px"
+    title="A Simple XYPlot Example"/>
+    
     <Button
         android:id="@+id/button1"
         android:layout_width="fill_parent"

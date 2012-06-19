@@ -2,6 +2,7 @@ package com.googlecode.neuraid.testingeeg;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -13,8 +14,17 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.androidplot.Plot;
+import com.androidplot.xy.*;
+ 
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Observable;
+import java.util.Observer;
+ 
 import com.neurosky.thinkgear.*;
+
+
 
 public class TestingEEGActivity extends Activity {
 	private BluetoothAdapter bluetoothAdapter;
@@ -35,6 +45,26 @@ public class TestingEEGActivity extends Activity {
 	private TextView tv1rc;
 	//private TextView tvcs;
 	
+	   // redraws a plot whenever an update is received:
+	   private class MyPlotUpdater implements Observer {
+	       Plot plot;
+	       public MyPlotUpdater(Plot plot) {
+	           this.plot = plot;
+	       }
+	       public void update(Observable o, Object arg) {
+	           try {
+	        	   Log.d("EEG","trying to post a redraw");
+	               plot.postRedraw();
+	        	   Log.d("EEG","redraw posted");
+	           } catch (InterruptedException e) {
+	               e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+	           }
+	       }
+	   }
+	 
+	   private XYPlot dynamicPlot;
+	   private MyPlotUpdater plotUpdater;
+	   private SampleDynamicSeries sine1Series;
 
 
 	private Button b;
@@ -42,12 +72,60 @@ public class TestingEEGActivity extends Activity {
 
 	private TGDevice tgDevice;
 	final boolean rawEnabled = false;
+	
+	private SampleDynamicXYDatasource data;
 
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		
+	       // get handles to our View defined in layout.xml:
+	       dynamicPlot = (XYPlot) findViewById(R.id.mySimpleXYPlot);
+	 
+	       plotUpdater = new MyPlotUpdater(dynamicPlot);
+	       
+	       // only display whole numbers in domain labels
+	       dynamicPlot.getGraphWidget().setDomainValueFormat(new DecimalFormat("0"));
+	 
+	       // getInstance and position datasets:
+	       data = new SampleDynamicXYDatasource();
+	       SampleDynamicSeries sine1Series = new SampleDynamicSeries(data, 0, "Meditation");
+	       //SampleDynamicSeries sine2Series = new SampleDynamicSeries(data, 1, "Sine 2");
+	 
+	       dynamicPlot.addSeries(sine1Series, new LineAndPointFormatter(Color.rgb(0, 0, 0), null, null));
+	 
+	       // create a series using a formatter with some transparency applied:
+	       //LineAndPointFormatter f1 = new LineAndPointFormatter(Color.rgb(0, 0, 200), null, Color.rgb(0, 0, 80));
+	       //f1.getFillPaint().setAlpha(220);
+	       //dynamicPlot.addSeries(sine2Series, f1);
+	       //dynamicPlot.setGridPadding(5, 0, 5, 0);
+	 
+	       //dynamicPlot.addSeries(sine1Series, new BarFormatter(Color.argb(100, 0, 200, 0), Color.rgb(0, 80, 0)));
+	       //dynamicPlot.addSeries(sine2Series, new BarFormatter(Color.argb(100, 0, 0, 200), Color.rgb(0, 0, 80)));
+	 
+	       // hook up the plotUpdater to the data model:
+	       data.addObserver(plotUpdater);
+	 
+	       dynamicPlot.setDomainStepMode(XYStepMode.SUBDIVIDE);
+	       dynamicPlot.setDomainStepValue(sine1Series.size());
+	       // thin out domain/range tick labels so they dont overlap each other:
+	       dynamicPlot.setTicksPerDomainLabel(5);
+	       dynamicPlot.setTicksPerRangeLabel(3);
+	       //dynamicPlot.getGraphWidget().setTicksPerRangeLabel(3);
+	       dynamicPlot.disableAllMarkup();
+	 
+	       // uncomment this line to freeze the range boundaries:
+	       dynamicPlot.setRangeBoundaries(0, 100, BoundaryMode.FIXED);
+	 
+	       // comment this line to get rid of "panning" or modify
+	       // the x/y values to move the view left or right.
+	       //dynamicPlot.setDomainBoundaries(5,10, BoundaryMode.FIXED);
+	 
+	       // kick off the data generating thread:
+	       new Thread(data).start();
+		
 		tvp = (TextView)findViewById(R.id.poortextView1);
 		tvp.setText(" Noise: ");
 		tvp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
@@ -118,6 +196,7 @@ public class TestingEEGActivity extends Activity {
 	private final Handler handler = new Handler() {
 		@Override
 		public void handleMessage(Message msg) {
+			Log.d("EEG", "received message " + msg.what);
 			switch (msg.what) {
 			case TGDevice.MSG_STATE_CHANGE:
 
@@ -175,6 +254,7 @@ public class TestingEEGActivity extends Activity {
 			case TGDevice.MSG_MEDITATION:
 				tv1m.setText(" "+msg.arg1+ " ");
 				tv1m.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+				data.setY(msg.arg1);
 				//tv.append("Meditation:" + msg.arg1 + "\n"); 
 				break;
 			case TGDevice.MSG_BLINK:
