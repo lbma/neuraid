@@ -8,6 +8,8 @@ import android.os.Message;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,22 +20,24 @@ public class TestingEEGActivity extends Activity {
 
 	private TextView tvp;
 	private TextView tv1p;
-	private  TextView tvr;
-	private  TextView tv1r;
-	private  TextView tvh;
+	private TextView tvr;
+	private TextView tv1r;
+	private TextView tvh;
 	private TextView tv1h;
-	private   TextView tva;
-	private  TextView tv1a;
-	private  TextView tvm;
-	private  TextView tv1m;
-	private  TextView tvb;
+	private TextView tva;
+	private TextView tv1a;
+	private TextView tvm;
+	private TextView tv1m;
+	private TextView tvb;
 	private TextView tv1b;
-	private  TextView tvrc;
+	private TextView tvrc;
 	private TextView tv1rc;
+	//private TextView tvcs;
 	
 
 
 	private Button b;
+	
 
 	private TGDevice tgDevice;
 	final boolean rawEnabled = false;
@@ -44,19 +48,21 @@ public class TestingEEGActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		tvp = (TextView)findViewById(R.id.poortextView1);
-		tvp.setText("Noise");
+		tvp.setPadding(5, 5, 5, 5);
+		
+		tvp.setText("Noise: ");
 		tvr = (TextView)findViewById(R.id.rawtextView2);
-		tvr.setText("Raw");
+		tvr.setText("Raw: ");
 		tvh = (TextView)findViewById(R.id.hearttextView3);
-		tvh.setText("Heart Rate");
+		tvh.setText("Heart Rate: ");
 		tva = (TextView)findViewById(R.id.attentiontextView4);
-		tva.setText("Attention");
+		tva.setText("Attention: ");
 		tvm = (TextView)findViewById(R.id.meditationtextView5);
-		tvm.setText("Meditation");
+		tvm.setText("Meditation: ");
 		tvb = (TextView)findViewById(R.id.blinktextView6);
-		tvb.setText("Blink");
+		tvb.setText("Blink: ");
 		tvrc = (TextView)findViewById(R.id.rawCounttextView7);
-		tvrc.setText("Raw Count");
+		tvrc.setText("Raw Count: ");
 		
 
 		tv1p = (TextView)findViewById(R.id.poorView1);
@@ -73,9 +79,14 @@ public class TestingEEGActivity extends Activity {
 
 		tv1rc = (TextView)findViewById(R.id.rawCountView7);
 
-
-
-
+		//tvcs = (TextView)findViewById(R.id.tvcs);
+		
+		b = (Button)findViewById(R.id.button1);
+		
+		
+		
+		//tvp.setLayoutParams( new TableRow.LayoutParams( android.view.ViewGroup.LayoutParams.WRAP_CONTENT, 1 , 1 ) );
+		
 		//tv.append("Android version: " + Integer.valueOf(android.os.Build.VERSION.SDK) + "\n" );
 		bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
 		if(bluetoothAdapter == null) {
@@ -107,19 +118,25 @@ public class TestingEEGActivity extends Activity {
 				case TGDevice.STATE_IDLE:
 					break;
 				case TGDevice.STATE_CONNECTING:		                	
+					b.setText("Connecting...");
+					//tvcs.setText("Connecting...");
 					//tv.append("Connecting...\n");
 					break;		                    
 				case TGDevice.STATE_CONNECTED:
 					//tv.append("Connected.\n");
+					b.setText("Connected");
 					tgDevice.start();
 					break;
 				case TGDevice.STATE_NOT_FOUND:
+					b.setText("Cant't find");
 					//tv.append("Can't find\n");
 					break;
 				case TGDevice.STATE_NOT_PAIRED:
+					b.setText("not paired");
 					//tv.append("not paired\n");
 					break;
 				case TGDevice.STATE_DISCONNECTED:
+					b.setText("Disconnected");
 					//tv.append("Disconnected mang\n");
 				}
 
