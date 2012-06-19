@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TableLayout;
@@ -48,21 +49,26 @@ public class TestingEEGActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
 		tvp = (TextView)findViewById(R.id.poortextView1);
-		tvp.setPadding(5, 5, 5, 5);
-		
-		tvp.setText("Noise: ");
+		tvp.setText(" Noise: ");
+		tvp.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 		tvr = (TextView)findViewById(R.id.rawtextView2);
-		tvr.setText("Raw: ");
+		tvr.setText(" Raw: ");
+		tvr.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 		tvh = (TextView)findViewById(R.id.hearttextView3);
-		tvh.setText("Heart Rate: ");
+		tvh.setText(" Heart Rate: ");
+		tvh.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 		tva = (TextView)findViewById(R.id.attentiontextView4);
-		tva.setText("Attention: ");
+		tva.setText(" Attention: ");
+		tva.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 		tvm = (TextView)findViewById(R.id.meditationtextView5);
-		tvm.setText("Meditation: ");
+		tvm.setText(" Meditation: ");
+		tvm.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 		tvb = (TextView)findViewById(R.id.blinktextView6);
-		tvb.setText("Blink: ");
+		tvb.setText(" Blink: ");
+		tvb.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 		tvrc = (TextView)findViewById(R.id.rawCounttextView7);
-		tvrc.setText("Raw Count: ");
+		tvrc.setText(" Raw Count: ");
+		tvrc.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 		
 
 		tv1p = (TextView)findViewById(R.id.poorView1);
@@ -143,34 +149,41 @@ public class TestingEEGActivity extends Activity {
 				break;
 			case TGDevice.MSG_POOR_SIGNAL:
 				//signal = msg.arg1;
-				tv1p.setText(""+ msg.arg1);
+				tv1p.setText(" "+ msg.arg1 + " ");
+				tv1p.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 				//tv.append("PoorSignal: " + msg.arg1 + "\n");
 				break;
 			case TGDevice.MSG_RAW_DATA:	  
 				//raw1 = msg.arg1;
-				tv1r.setText(""+msg.arg1);
+				tv1r.setText(" "+msg.arg1+ " ");
+				tv1r.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 				//tv.append("Got raw: " + msg.arg1 + "\n");
 				break;
 			case TGDevice.MSG_HEART_RATE:
-				tv1h.setText(""+msg.arg1);
+				tv1h.setText(" "+msg.arg1+ " ");
+				tv1h.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 				//tv.append("Heart rate: " + msg.arg1 + "\n");
 				break;
 			case TGDevice.MSG_ATTENTION:
-				tv1a.setText(""+msg.arg1);
+				tv1a.setText(" "+msg.arg1+ " ");
+				tv1a.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 				//att = msg.arg1;
 				//tv.append("Attention: " + msg.arg1 + "\n");
 				//Log.v("HelloA", "Attention: " + att + "\n");
 				break;
 			case TGDevice.MSG_MEDITATION:
-				tv1m.setText(""+msg.arg1);
+				tv1m.setText(" "+msg.arg1+ " ");
+				tv1m.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 				//tv.append("Meditation:" + msg.arg1 + "\n"); 
 				break;
 			case TGDevice.MSG_BLINK:
-				tv1b.setText(""+msg.arg1);
+				tv1b.setText(" "+msg.arg1+ " ");
+				tv1b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 				//tv.append("Blink: " + msg.arg1 + "\n");
 				break;
 			case TGDevice.MSG_RAW_COUNT:
-				tv1rc.setText(""+msg.arg1);
+				tv1rc.setText(" " +msg.arg1+ " ");
+				tv1rc.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 				//tv.append("Raw Count: " + msg.arg1 + "\n");
 				break;
 			case TGDevice.MSG_LOW_BATTERY:
