@@ -17,9 +17,10 @@ public class SampleDynamicXYDatasource implements Runnable {
    }
 }
  
-   private static final int SAMPLE_SIZE = 30;
-   private ArrayList<Number> ys = new ArrayList<Number>();
+   private static final int SAMPLE_SIZE = 2000;
+   private ArrayList<Number> ys;
    private MyObservable notifier;
+   private boolean updated;
  
    {
        notifier = new MyObservable();
@@ -28,11 +29,21 @@ public class SampleDynamicXYDatasource implements Runnable {
    //@Override
    public void run() {
        try {
-           boolean isRising = true;
+           updated = false;
+           ys = new ArrayList<Number>();
+           for (int i = 0; i < SAMPLE_SIZE; i++) {
+        	   ys.add(0);
+           }
            while (true) {
  
-               Thread.sleep(500); // decrease or remove to speed up the refresh rate.
-               notifier.notifyObservers();
+               Thread.sleep(10); // decrease or remove to speed up the refresh rate.
+        	   notifier.notifyObservers();
+//               synchronized(this) {
+//               if (updated) {
+//            	   notifier.notifyObservers();
+//            	   updated = false;
+//               }
+//               }
            }
        } catch (InterruptedException e) {
            e.printStackTrace();
@@ -59,11 +70,12 @@ public class SampleDynamicXYDatasource implements Runnable {
         return ys.get(index);
    }
  
-   public void setY(int y) {
+   public synchronized void setY(int y) {
 	   ys.add(y);
 	   if (ys.size() > SAMPLE_SIZE) {
 		   ys.remove(0);
 	   }
+	   updated = true;
    }
    
    public void addObserver(Observer observer) {

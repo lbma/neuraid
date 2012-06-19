@@ -71,7 +71,7 @@ public class TestingEEGActivity extends Activity {
 	
 
 	private TGDevice tgDevice;
-	final boolean rawEnabled = false;
+	final boolean rawEnabled = true;
 	
 	private SampleDynamicXYDatasource data;
 
@@ -117,11 +117,11 @@ public class TestingEEGActivity extends Activity {
 	       dynamicPlot.disableAllMarkup();
 	 
 	       // uncomment this line to freeze the range boundaries:
-	       dynamicPlot.setRangeBoundaries(0, 100, BoundaryMode.FIXED);
+	       dynamicPlot.setRangeBoundaries(-1000, 1000, BoundaryMode.FIXED);
 	 
 	       // comment this line to get rid of "panning" or modify
 	       // the x/y values to move the view left or right.
-	       //dynamicPlot.setDomainBoundaries(5,10, BoundaryMode.FIXED);
+	       dynamicPlot.setDomainBoundaries(0,2000, BoundaryMode.FIXED);
 	 
 	       // kick off the data generating thread:
 	       new Thread(data).start();
@@ -237,6 +237,7 @@ public class TestingEEGActivity extends Activity {
 				//raw1 = msg.arg1;
 				tv1r.setText(" "+msg.arg1+ " ");
 				tv1r.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
+				data.setY(msg.arg1);
 				//tv.append("Got raw: " + msg.arg1 + "\n");
 				break;
 			case TGDevice.MSG_HEART_RATE:
@@ -254,7 +255,7 @@ public class TestingEEGActivity extends Activity {
 			case TGDevice.MSG_MEDITATION:
 				tv1m.setText(" "+msg.arg1+ " ");
 				tv1m.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
-				data.setY(msg.arg1);
+				//data.setY(msg.arg1);
 				//tv.append("Meditation:" + msg.arg1 + "\n"); 
 				break;
 			case TGDevice.MSG_BLINK:
