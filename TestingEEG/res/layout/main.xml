@@ -2,12 +2,14 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="#ffffff"
     android:orientation="vertical" >
 
     <TableLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_weight="1.00" >
+        android:layout_gravity="center"
+        android:layout_weight="1.01" >
 
         <TableRow
             android:id="@+id/poorRow1"
@@ -16,19 +18,21 @@
 
             <TextView
                 android:id="@+id/poortextView1"
-                android:layout_width="fill_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:background="@drawable/back"
+                android:gravity="right"
+                android:text="TextView"
+                android:textColor="@color/orange99" />
 
             <TextView
                 android:id="@+id/poorView1"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:background="@drawable/back"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:textColor="@color/orange99" />
         </TableRow>
 
         <TableRow
@@ -41,16 +45,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:background="@drawable/back"
+                android:gravity="right"
+                android:text="TextView"
+                android:textColor="@color/orange99" />
 
             <TextView
                 android:id="@+id/rawView2"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:background="@drawable/back"
+                android:textColor="@color/orange99" />
         </TableRow>
 
         <TableRow
@@ -63,16 +69,17 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:background="@drawable/back"
+                android:gravity="right"
+                android:text="TextView"
+                android:textColor="@color/orange99" />
 
             <TextView
                 android:id="@+id/heartView3"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:textColor="@color/orange99" />
         </TableRow>
 
         <TableRow
@@ -85,15 +92,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" />
+                android:background="@drawable/back"
+                android:gravity="right"
+                android:text="TextView"
+                android:textColor="@color/orange99" />
 
             <TextView
                 android:id="@+id/attentionView4"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:background="@drawable/back"
+                android:textColor="@color/orange99" />
         </TableRow>
 
         <TableRow
@@ -106,16 +116,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:gravity="right"
+                android:background="@drawable/back"
+                android:text="TextView"
+                android:textColor="@color/orange99" />
 
             <TextView
                 android:id="@+id/meditationView5"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:background="@drawable/back"
+                android:textColor="@color/orange99" />
         </TableRow>
 
         <TableRow
@@ -128,16 +140,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:gravity="right"
+                android:background="@drawable/back"
+                android:text="TextView"
+                android:textColor="@color/orange99" />
 
             <TextView
                 android:id="@+id/blinkView6"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:background="@drawable/back"
+                android:textColor="@color/orange99" />
         </TableRow>
 
         <TableRow
@@ -150,22 +164,18 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
+                android:gravity="right"
+                android:background="@drawable/back"
+                android:text="TextView"
+                android:textColor="@color/orange99" />
 
             <TextView
                 android:id="@+id/rawCountView7"
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight="1"
-                android:text="TextView" >
-            </TextView>
-        </TableRow>
-
-        <TableRow
-            android:id="@+id/lowBatteryRow8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content" >
+                android:background="@drawable/back"
+                android:textColor="@color/orange99" />
         </TableRow>
     </TableLayout>
 
@@ -174,7 +184,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:onClick="doStuff"
-        android:text="Find Headset" >
-    </Button>
+        android:text="Find Headset"
+        android:color="@color/orange99" />
 
 </LinearLayout>
