@@ -146,7 +146,7 @@ public class TestingEEGActivity extends Activity {
 		
 
 		b = (Button)findViewById(R.id.button1);
-		b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+		b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
 		//iv = (ImageView)findViewById(R.id.background);
 		//iv.setAlpha(100);
