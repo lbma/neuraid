@@ -4,18 +4,17 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/smog" >
-
+
     <LinearLayout
         android:id="@+id/LinearLayout1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical" >
-
+
         <TableLayout
             android:layout_width="171dp"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:layout_weight="7.67" >
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" >
 
             <TableRow
                 android:id="@+id/poorRow1"
@@ -31,7 +30,7 @@
                     android:gravity="right"
                     android:text=" Noise "
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/poorView1"
@@ -57,7 +56,7 @@
                     android:gravity="right"
                     android:text=" Raw "
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/rawView2"
@@ -65,32 +64,13 @@
                     android:layout_height="fill_parent"
                     android:layout_weight="1"
                     android:background="@drawable/back"
-                    android:textColor="@color/smog" />
+                    android:textColor="@color/black" />
             </TableRow>
 
             <TableRow
                 android:id="@+id/heartRow3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" >
-
-                <TextView
-                    android:id="@+id/hearttextView3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/back"
-                    android:gravity="right"
-                    android:text=" Heart Rate "
-                    android:textColor="@color/black"
-                    android:textSize="20dp" />
-
-                <TextView
-                    android:id="@+id/heartView3"
-                    android:layout_width="fill_parent"
-                    android:layout_height="fill_parent"
-                    android:layout_weight="1"
-                    android:background="@drawable/back"
-                    android:textColor="@color/black" />
             </TableRow>
 
             <TableRow
@@ -107,7 +87,7 @@
                     android:gravity="right"
                     android:text=" Attention "
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/attentionView4"
@@ -132,7 +112,7 @@
                     android:gravity="right"
                     android:text=" Meditation "
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/meditationView5"
@@ -157,7 +137,7 @@
                     android:gravity="right"
                     android:text=" Blink "
                     android:textColor="@color/black"
-                    android:textSize="20dp" />
+                    android:textSize="18dp" />
 
                 <TextView
                     android:id="@+id/blinkView6"
@@ -168,14 +148,16 @@
                     android:textColor="@color/black" />
             </TableRow>
         </TableLayout>
-    <com.androidplot.xy.XYPlot
-    android:id="@+id/mySimpleXYPlot"
-    android:layout_width="fill_parent"
-    android:layout_height="200px"
-    android:layout_marginTop="10px"
-    android:layout_marginLeft="10px"
-    android:layout_marginRight="10px"
-    title="A Simple XYPlot Example"/>
+
+        <com.androidplot.xy.XYPlot
+            android:id="@+id/mySimpleXYPlot"
+            android:layout_width="fill_parent"
+            android:layout_height="125dp"
+            android:layout_marginLeft="10px"
+            android:layout_marginRight="10px"
+            android:layout_marginTop="10px"
+            android:layout_weight="0.03"
+            title="A Simple XYPlot Example" />
 
         <Button
             android:id="@+id/button1"
