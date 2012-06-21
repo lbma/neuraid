@@ -27,6 +27,7 @@ public class NeuraidService extends Service {
 	private TGDevice tgDevice;
 	final boolean rawEnabled = true;
 	private BluetoothAdapter bluetoothAdapter;
+	private DatabaseHandler db;
 
 
 	@Override
@@ -53,6 +54,13 @@ public class NeuraidService extends Service {
 			foundbluetooth = true;
 			tgDevice = new TGDevice(bluetoothAdapter, handler);
 		}  
+		db = new DatabaseHandler(this);
+		 /**
+        * CRUD Operations
+        * */
+       // Inserting Headset Data
+		Log.d("Insert: ", "Inserting ..");
+		
 	}
 
 
@@ -140,12 +148,13 @@ public class NeuraidService extends Service {
 				//tv.append("Heart rate: " + msg.arg1 + "\n");
 				break;
 			case TGDevice.MSG_ATTENTION:
-
+				db.addData("Attention", msg.arg1, System.currentTimeMillis());
 				//att = msg.arg1;
 				//tv.append("Attention: " + msg.arg1 + "\n");
 				//Log.v("HelloA", "Attention: " + att + "\n");
 				break;
 			case TGDevice.MSG_MEDITATION:
+				db.addData("Meditation", msg.arg1, System.currentTimeMillis());
 				Log.d("Neuraid Service", "Meditaion = "+  msg.arg1);
 				//data.setY(msg.arg1);
 				//tv.append("Meditation:" + msg.arg1 + "\n"); 
