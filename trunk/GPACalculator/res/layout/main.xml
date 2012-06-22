@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" >
+    android:orientation="vertical" 
+    android:background="@color/pastel_green">
 
     <LinearLayout
         android:id="@+id/linearLayout1"
@@ -13,29 +14,35 @@
             android:id="@+id/B1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/more" />
-
+            android:background="@drawable/custom_button"
+            android:text="@string/more"
+            android:textColor="@color/smog" />
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/GPA"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
-
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/ebonics_444" />
+
         <TextView
             android:id="@+id/gpanumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="right"
-            android:text="Large Text"
-            android:textAppearance="?android:attr/textAppearanceLarge" />
+            android:text="@string/gpanumber"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/smog" />
 
     </LinearLayout>
-
+
     <ListView
         android:id="@+id/coursesArray"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" >
+        android:layout_height="wrap_content"
+        android:background="@color/smog"
+        android:textColor="@color/green1" >
 
     </ListView>
 
