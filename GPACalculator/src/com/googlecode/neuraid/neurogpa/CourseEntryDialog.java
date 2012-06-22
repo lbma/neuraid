@@ -3,6 +3,7 @@ package com.googlecode.neuraid.neurogpa;
 
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -10,7 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
-//...
+
 
 public class CourseEntryDialog extends DialogFragment {
 	
@@ -29,7 +30,7 @@ public class CourseEntryDialog extends DialogFragment {
 		
 		// Prepares the layout for use and renames it view
 		View view = inflater.inflate(R.layout.courseentry, container);
-		// Initalization. *Connects the view with the data member
+		// Initialization *Connects the view with the data member
 		mEditText = (EditText) view.findViewById(R.id.nameofcourse);
 		cEditText = (EditText) view.findViewById(R.id.credit);
 		gradeData = (Spinner) view.findViewById(R.id.gradeList);
@@ -52,13 +53,16 @@ public class CourseEntryDialog extends DialogFragment {
 		
 		// Set up reaction for the Button to be pressed
 		yes.setOnClickListener(new OnClickListener() {
-			
 			// When Yes is Clicked it adds the new info the the Array List
 			public void onClick(View arg0) {
 				NeuroGPAActivity activity = (NeuroGPAActivity) getActivity();
 				activity.addCourse(mEditText.getText().toString(),Integer.parseInt(cEditText.getText().toString()),gradeData.getSelectedItem().toString());
+				Log.d("onClick Dialog", "sendng data to activity file");
+
 				// Makes the add course Dialog Box disappear
 				CourseEntryDialog.this.dismiss();
+				Log.d("onClick Dialog", "Course Entry Dialog dismissed");
+
 			}
 
 		});

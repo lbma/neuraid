@@ -5,10 +5,12 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.app.Activity;
+import android.support.v4.app.LoaderManager;
+import android.support.v4.content.CursorLoader;
+import android.support.v4.content.Loader;
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,47 +19,50 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.database.Cursor;
 
 
-public class NeuroGPAActivity extends FragmentActivity implements OnClickListener {
+public class NeuroGPAActivity extends FragmentActivity implements OnClickListener{
 
 	// Data Members
 	private Button B1;
 	private ListView courseList;
 	private TextView gradeNumber;
-	private ArrayList<Course> courses;
-	
-	private CourseAdapter ca;
 
+	// Declares the array that will contain on the courses
+	private ArrayList<Course> courses;
+	// Declares the Adapter
+	private CourseAdapter ca;
+	// Declares the Database
+	private DatabaseHandler  db;
 	// Places the information from the Array into the main view
 	private class CourseAdapter extends ArrayAdapter<Course> {
-
 		// Creating the Array List variable
 		private ArrayList<Course> items;
-		
+
 		// initializes the items (courses) from the array list for the view
-		public CourseAdapter(Context context, int textViewResourceId, ArrayList<Course> items) {
-			super(context, textViewResourceId, items);
-			this.items = items;
+		public CourseAdapter(Context context, int textViewResourceId, ArrayList<Course> courses) {
+			super(context, textViewResourceId, courses);
+			this.items = courses;
 		}
 
 		// The List Entry that contains Name, Course, and Credit 
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			View v = convertView;
-         // Create view if not there already
+			// Create view if not there already
 			if (v == null) {
 				LayoutInflater vi = (LayoutInflater)getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 				v = vi.inflate(R.layout.row, null);
 			}
-         
-         // find item based on position in list
+
+			// find item based on position in list
 			Course o = items.get(position);
 			if (o != null) {
 				TextView tt = (TextView) v.findViewById(R.id.toptext);
 				TextView mt = (TextView) v.findViewById(R.id.middletext);
 				TextView bt = (TextView) v.findViewById(R.id.bottomtext);
-            // set the view to display information from the Course object
+				// set the view to display information from the Course object
 				if(tt != null) {
 					tt.setText("Name: " + o.getName());                            
 				}
@@ -79,29 +84,50 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		// Constructorish
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
+		Log.d("Create", "Just opened view");
+
+		db = new DatabaseHandler(this);
+		Log.d("Create", "implemented databasehandler");
 
 		// Initialize a Button 
 		B1 = (Button) findViewById(R.id.B1);
 		// Set up reaction when the Button to be pressed
 		B1.setOnClickListener(this);
-		
+
 		// Initialize the ListView containing the courses and the Text containing the GPA in the main view
 		courseList = (ListView) findViewById(R.id.coursesArray);
 		gradeNumber = (TextView) findViewById(R.id.gpanumber);
 
+		//courseDB = new CourseDB(this);
+
 		// Initialize the array containing the courses into a variable
+
 		courses = new ArrayList<Course>();
+		Log.d("Create", "Just made and array with courses");
+
 		/* courses.add(new Course("English101",4,"A"));
 	        courses.add(new Course("Math101",3,"C"));
 	        courses.add(new Course("Science101",4,"B"));
 		 */
-		
+
 		// Initialize the course adapter into a variable and setting up connection between ArrayList and ListView
 		ca = new CourseAdapter(this,R.layout.row,courses);
+		Log.d("Create", "Just used the adapter to make the row view for the courses");
+
 		courseList.setAdapter(ca);
+		Log.d("Create", "set adapter");
+
+		updateView();
 		recalculateGPA();
+		Log.d("Create", "recalculate GPA");
+
 	}
 
+
+	public void onResume() {
+		super.onResume();
+		Log.d("onResume","Just Resumed");
+	}
 
 
 	public void onClick(View arg0) {
@@ -109,6 +135,8 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		FragmentManager fm = getSupportFragmentManager();
 		CourseEntryDialog ceDialog = new CourseEntryDialog();
 		ceDialog.show(fm, "fragment_edit_name");	
+		Log.d("Click View", "Just opened dialog for course entry");
+
 	}
 
 	// Other Methods
@@ -120,7 +148,7 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		/* Goes through the Array list and adds each credit in the array to the totalcredit(variable), while it is going through the
 		it examines the Grade and if it is equal to a certain letter it multiples it by it's corresponding number. After it multiples the 
 		the credit by the letter's number and adds it to what ever the GPA is currently. 
-		*/
+		 */
 		for (int i = 0; i < courses.size(); i++){
 			Course c = courses.get(i);
 			totalCredits += c.getCredit();
@@ -138,31 +166,47 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 				gpa += c.getCredit() * 1;
 			}
 		}
-		
+
 		// If the total credits is not 0, then the GPA is divided by the total number of credits.
 		if (totalCredits != 0) {
 			gpa /= totalCredits; }
-		
+
 		// Rounds the raw GPA to its hundredth place.
 		BigDecimal totalround = new BigDecimal(gpa).setScale(2, BigDecimal.ROUND_HALF_UP);
-		
+
 		// Sets the text in the main view to show the rounded GPA
 		gradeNumber.setText("" + totalround);
+		Log.d("GPA", "GPA calculated");
+
 
 	}
+
+
 
 	// Creates a method that need the input of the name, credit, and grade.  
 	public void addCourse(String name, int credit, String grade) {
-		// Creates a new object called Course and adds it to the array
-		courses.add(new Course(name, credit, grade));
-		// Refreshes the ListView containing the courses in the view via the adapter
-		ca.notifyDataSetChanged();
-		// Recalculates the GPA 
-		recalculateGPA();
+		db.addCourses(name, credit, grade);
+		Log.d("ADDCourseActivity", "Activity is adding the courses from Dialog to the database");
+		updateView();
 	}
+		 
+		
+	public void updateView(){	
+		courses = db.getAllCourses();
+		Log.d("Update", "returned all courses");
+		// Initialize the course adapter into a variable and setting up connection between ArrayList and ListView
+		ca = new CourseAdapter(this,R.layout.row,courses);
+		Log.d("Update", "Just used the adapter to make the row view for the courses");
 
+		courseList.setAdapter(ca);
+		Log.d("Update", "set adapter");
 
-
-
+		recalculateGPA();
+		Log.d("Update", "recalculate GPA");
+		ca.notifyDataSetChanged();
+		Log.d("Load", "refreash array");
+		recalculateGPA();		
+		
+	}
 }
 
