@@ -33,7 +33,7 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 	// Declares the Database
 	private DatabaseHandler  db;
 	// Places the information from the Array into the main view
-	private class CourseAdapter extends ArrayAdapter<Course> {
+	private class CourseAdapter extends ArrayAdapter<Course> implements OnClickListener{
 		// Creating the Array List variable
 		private ArrayList<Course> items;
 
@@ -60,6 +60,7 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 				TextView mt = (TextView) v.findViewById(R.id.middleText);
 				TextView bt = (TextView) v.findViewById(R.id.bottomText);
 				editButton = (Button) v.findViewById(R.id.editcoursebutton);
+				editButton.setOnClickListener(this);
 				
 				
 				// set the view to display information from the Course object
@@ -74,6 +75,13 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 				}
 			}
 			return v;
+		}
+
+		public void onClick(View arg0) {
+			FragmentManager fm2 = getSupportFragmentManager();
+    		CourseEntryDialog ceDialog2 = new CourseEntryDialog();
+    		ceDialog2.show(fm2, "fragment_edit_name");	
+    		Log.d("Click View", "Just opened dialog to edit course entries");			
 		}
 	}
 
@@ -134,24 +142,14 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 
 	public void onClick(View arg0) {
 		// When button is clicked, show entry dialog
-		switch (arg0.getId()) {
-        case R.id.B1: 
+	
          // do something
         	FragmentManager fm = getSupportFragmentManager();
     		CourseEntryDialog ceDialog = new CourseEntryDialog();
     		ceDialog.show(fm, "fragment_edit_name");	
     		Log.d("Click View", "Just opened dialog for course entry");
-
-         break;
-        case R.id.editcoursebutton:
-         // do something else
-        	FragmentManager fm2 = getSupportFragmentManager();
-    		CourseEntryDialog ceDialog2 = new CourseEntryDialog();
-    		ceDialog2.show(fm2, "fragment_edit_name");	
-    		Log.d("Click View", "Just opened dialog to edit course entries");
-         break;
      }
-  }
+  
 
 
 
