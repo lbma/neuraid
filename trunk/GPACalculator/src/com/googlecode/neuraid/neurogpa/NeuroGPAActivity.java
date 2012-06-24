@@ -5,9 +5,6 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.LoaderManager;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -19,7 +16,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.database.Cursor;
 
 
 public class NeuroGPAActivity extends FragmentActivity implements OnClickListener{
@@ -28,6 +24,7 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 	private Button B1;
 	private ListView courseList;
 	private TextView gradeNumber;
+	private Button editButton;
 
 	// Declares the array that will contain on the courses
 	private ArrayList<Course> courses;
@@ -59,12 +56,15 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 			// find item based on position in list
 			Course o = items.get(position);
 			if (o != null) {
-				TextView tt = (TextView) v.findViewById(R.id.toptext);
-				TextView mt = (TextView) v.findViewById(R.id.middletext);
-				TextView bt = (TextView) v.findViewById(R.id.bottomtext);
+				TextView tt = (TextView) v.findViewById(R.id.topText);
+				TextView mt = (TextView) v.findViewById(R.id.middleText);
+				TextView bt = (TextView) v.findViewById(R.id.bottomText);
+				editButton = (Button) v.findViewById(R.id.editcoursebutton);
+				
+				
 				// set the view to display information from the Course object
 				if(tt != null) {
-					tt.setText("Name: " + o.getName());                            
+					tt.setText("Name: " + o.getName());
 				}
 				if(mt != null){
 					mt.setText("Credit: " + o.getCredit());
@@ -93,6 +93,8 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		B1 = (Button) findViewById(R.id.B1);
 		// Set up reaction when the Button to be pressed
 		B1.setOnClickListener(this);
+		
+		
 
 		// Initialize the ListView containing the courses and the Text containing the GPA in the main view
 		courseList = (ListView) findViewById(R.id.coursesArray);
@@ -132,12 +134,26 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 
 	public void onClick(View arg0) {
 		// When button is clicked, show entry dialog
-		FragmentManager fm = getSupportFragmentManager();
-		CourseEntryDialog ceDialog = new CourseEntryDialog();
-		ceDialog.show(fm, "fragment_edit_name");	
-		Log.d("Click View", "Just opened dialog for course entry");
+		switch (arg0.getId()) {
+        case R.id.B1: 
+         // do something
+        	FragmentManager fm = getSupportFragmentManager();
+    		CourseEntryDialog ceDialog = new CourseEntryDialog();
+    		ceDialog.show(fm, "fragment_edit_name");	
+    		Log.d("Click View", "Just opened dialog for course entry");
 
-	}
+         break;
+        case R.id.editcoursebutton:
+         // do something else
+        	FragmentManager fm2 = getSupportFragmentManager();
+    		CourseEntryDialog ceDialog2 = new CourseEntryDialog();
+    		ceDialog2.show(fm2, "fragment_edit_name");	
+    		Log.d("Click View", "Just opened dialog to edit course entries");
+         break;
+     }
+  }
+
+
 
 	// Other Methods
 
@@ -189,7 +205,10 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		Log.d("ADDCourseActivity", "Activity is adding the courses from Dialog to the database");
 		updateView();
 	}
-		 
+	
+	public void removeCourse(){
+		
+	}
 		
 	public void updateView(){	
 		courses = db.getAllCourses();
