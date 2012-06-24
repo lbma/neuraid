@@ -17,14 +17,14 @@
             android:background="@drawable/custom_button"
             android:text="@string/more"
             android:textColor="@color/smog" />
-
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/GPA"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:textColor="@color/ebonics_444" />
+            android:textColor="@color/black" />
 
         <TextView
             android:id="@+id/gpanumber"
