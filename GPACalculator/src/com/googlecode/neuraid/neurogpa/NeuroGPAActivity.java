@@ -68,13 +68,13 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 
 				// set the view to display information from the Course object
 				if(tt != null) {
-					tt.setText("Name: " + o.getName());
+					tt.setText("" + o.getName());
 				}
 				if(mt != null){
-					mt.setText("Credit: " + o.getCredit());
+					mt.setText("Credits: " + o.getCredit());
 				}
 				if(bt != null){
-					bt.setText("Grade: " + o.getGrade());
+					bt.setText("" + o.getGrade());
 				}
 						
 			}
