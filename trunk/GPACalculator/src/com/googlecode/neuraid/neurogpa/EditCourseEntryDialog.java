@@ -3,7 +3,6 @@ package com.googlecode.neuraid.neurogpa;
 
 import java.util.HashMap;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
