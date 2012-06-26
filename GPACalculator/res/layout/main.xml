@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/TableLayout1"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:orientation="vertical" 
-    android:background="@color/pastel_green">
-
-    <LinearLayout
-        android:id="@+id/linearLayout1"
+    android:background="@color/pastel_green"     >
+
+    <TableRow
+        android:id="@+id/TableRow1"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" >
 
@@ -16,34 +16,37 @@
             android:layout_height="wrap_content"
             android:background="@drawable/custom_button"
             android:text="@string/more"
-            android:textColor="@color/smog" />
-
+            android:textColor="@color/black" 
+            android:layout_weight="90"/>
+
         <TextView
             android:id="@+id/textView1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="5"
+            android:gravity="right"
             android:text="@string/GPA"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/black" />
-
+
         <TextView
             android:id="@+id/gpanumber"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_weight="5"
             android:gravity="right"
             android:text="@string/gpanumber"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:textColor="@color/smog" />
+        
+    </TableRow>
 
-    </LinearLayout>
-
     <ListView
         android:id="@+id/coursesArray"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/smog"
         android:textColor="@color/green1" >
-
     </ListView>
 
-</LinearLayout>
+</TableLayout>

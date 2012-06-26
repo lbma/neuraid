@@ -1,8 +1,6 @@
 package com.googlecode.neuraid.neurogpa;
 
 import java.util.ArrayList;
-import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -90,7 +88,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 	}
 
-	// Getting single contact
+	// Getting single courses
 	Course getCourse(int id) {
 		Log.d("Get Course", "Starting to get courses from database");
 
@@ -110,7 +108,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
 		Course courses = new Course(Integer.parseInt(cursor.getString(0)),
 				cursor.getString(1), cursor.getInt(2), cursor.getString(3));
-		// return contact
+		// return course
 		return courses;
 	}
 	
@@ -145,18 +143,18 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		return courseList;
 	}
 
-	// Updating single contact
-	public int updateCourse(Course course) {
+	// Updating single course
+	public int updateCourse(int id ,String name, int credit, String grade){
 		SQLiteDatabase db = this.getWritableDatabase();
 
 		ContentValues values = new ContentValues();
-		values.put(KEY_NAME, course.getName());
-		values.put(KEY_CREDIT, course.getGrade());
-		values.put(KEY_GRADE, course.getGrade());
+		values.put(KEY_NAME, name);
+		values.put(KEY_CREDIT, credit);
+		values.put(KEY_GRADE, grade);
 
 		// updating row
 		return db.update(TABLE_COURSES, values, KEY_ID + " = ?",
-				new String[] { String.valueOf(course.getID()) });
+				new String[] { String.valueOf(id) });
 	}
 
 	// Deleting single contact
