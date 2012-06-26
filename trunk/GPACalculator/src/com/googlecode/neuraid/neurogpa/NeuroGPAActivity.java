@@ -137,8 +137,6 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 				
 				
 				Log.d("Click", "Selected " + position);
-				Toast toast = Toast.makeText(NeuroGPAActivity.this, "Selected " + position, Toast.LENGTH_SHORT);
-				toast.show();
 			}
 			
 		}

@@ -24,6 +24,8 @@ public class DeleteCourseDialog extends DialogFragment {
 
 		Button No = (Button)view.findViewById(R.id.nobutton);
 		Button Yes = (Button)view.findViewById(R.id.yesbutton);
+		getDialog().setTitle("Really Delete?");
+
 		
 		// Set up reaction for the Button to be pressed
 		No.setOnClickListener(new OnClickListener() {
