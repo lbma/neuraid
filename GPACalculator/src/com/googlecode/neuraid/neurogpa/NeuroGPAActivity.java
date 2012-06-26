@@ -146,14 +146,16 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		);
 		Log.d("Create", "set adapter");
 		
-//		courseList.setOnItemLongClickListener(new OnItemLongClickListener(){
-//			public void onItemLongClick(AdapterView<?> arg0, View arg1, int position,
-//					long arg3) {
-//				FragmentManager fm3 = getSupportFragmentManager();
-//				Course d = courses.get(position);
-//				EditCourseEntryDialog eceDialog = new EditCourseEntryDialog(c);
-//			}
-//		});
+		courseList.setOnItemLongClickListener(new OnItemLongClickListener(){
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				FragmentManager fm3 = getSupportFragmentManager();
+				Course d = courses.get(position);
+				DeleteCourseDialog dcDialog = new DeleteCourseDialog(d);
+				dcDialog.show(fm3, "fragment_edit_name");
+				return true;
+			}
+		});
 
 		updateView();
 		recalculateGPA();
@@ -239,8 +241,9 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		updateView();	
 	}
 
-	public void removeCourse(){
-		
+	public void deleteCourse(Course d){
+		db.deleteCourse(d);
+		updateView();
 	}
 
 	public void updateView(){	
