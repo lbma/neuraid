@@ -12,10 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class NeuroGPAActivity extends FragmentActivity implements OnClickListener{
@@ -24,21 +28,20 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 	private Button B1;
 	private ListView courseList;
 	private TextView gradeNumber;
-	private Button editButton;
 
 	// Declares the array that will contain on the courses
-	private ArrayList<Course> courses;
+	private static ArrayList<Course> courses;
 	// Declares the Adapter
 	private CourseAdapter ca;
 	// Declares the Database
-	private DatabaseHandler  db;
+	private static DatabaseHandler  db;
 	// Places the information from the Array into the main view
-	private class CourseAdapter extends ArrayAdapter<Course> implements OnClickListener{
+	private class CourseAdapter extends ArrayAdapter<Course>{
 		// Creating the Array List variable
 		private ArrayList<Course> items;
 
 		// initializes the items (courses) from the array list for the view
-		public CourseAdapter(Context context, int textViewResourceId, ArrayList<Course> courses) {
+		public CourseAdapter(Context context, int textViewResourceId, ArrayList<Course> courses)  {
 			super(context, textViewResourceId, courses);
 			this.items = courses;
 		}
@@ -59,10 +62,10 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 				TextView tt = (TextView) v.findViewById(R.id.topText);
 				TextView mt = (TextView) v.findViewById(R.id.middleText);
 				TextView bt = (TextView) v.findViewById(R.id.bottomText);
-				editButton = (Button) v.findViewById(R.id.editcoursebutton);
-				editButton.setOnClickListener(this);
-				
-				
+				//editButton = (Button) v.findViewById(R.id.editcoursebutton);
+				//editButton.setOnClickListener(this);
+
+
 				// set the view to display information from the Course object
 				if(tt != null) {
 					tt.setText("Name: " + o.getName());
@@ -73,16 +76,11 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 				if(bt != null){
 					bt.setText("Grade: " + o.getGrade());
 				}
+						
 			}
 			return v;
 		}
 
-		public void onClick(View arg0) {
-			FragmentManager fm2 = getSupportFragmentManager();
-    		CourseEntryDialog ceDialog2 = new CourseEntryDialog();
-    		ceDialog2.show(fm2, "fragment_edit_name");	
-    		Log.d("Click View", "Just opened dialog to edit course entries");			
-		}
 	}
 
 
@@ -101,13 +99,13 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		B1 = (Button) findViewById(R.id.B1);
 		// Set up reaction when the Button to be pressed
 		B1.setOnClickListener(this);
-		
-		
+
+
 
 		// Initialize the ListView containing the courses and the Text containing the GPA in the main view
 		courseList = (ListView) findViewById(R.id.coursesArray);
 		gradeNumber = (TextView) findViewById(R.id.gpanumber);
-
+		
 		//courseDB = new CourseDB(this);
 
 		// Initialize the array containing the courses into a variable
@@ -125,7 +123,37 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		Log.d("Create", "Just used the adapter to make the row view for the courses");
 
 		courseList.setAdapter(ca);
+		courseList.setOnItemClickListener(new OnItemClickListener(){
+
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				// TODO Auto-generated method stub
+				FragmentManager fm2 = getSupportFragmentManager();
+				Course c = courses.get(position);
+				EditCourseEntryDialog eceDialog = new EditCourseEntryDialog(c);
+				
+				eceDialog.show(fm2, "fragment_edit_name");	
+				Log.d("Click View", "Just opened dialog to edit course entries");
+				
+				
+				Log.d("Click", "Selected " + position);
+				Toast toast = Toast.makeText(NeuroGPAActivity.this, "Selected " + position, Toast.LENGTH_SHORT);
+				toast.show();
+			}
+			
+		}
+		
+		);
 		Log.d("Create", "set adapter");
+		
+//		courseList.setOnItemLongClickListener(new OnItemLongClickListener(){
+//			public void onItemLongClick(AdapterView<?> arg0, View arg1, int position,
+//					long arg3) {
+//				FragmentManager fm3 = getSupportFragmentManager();
+//				Course d = courses.get(position);
+//				EditCourseEntryDialog eceDialog = new EditCourseEntryDialog(c);
+//			}
+//		});
 
 		updateView();
 		recalculateGPA();
@@ -142,14 +170,14 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 
 	public void onClick(View arg0) {
 		// When button is clicked, show entry dialog
-	
-         // do something
-        	FragmentManager fm = getSupportFragmentManager();
-    		CourseEntryDialog ceDialog = new CourseEntryDialog();
-    		ceDialog.show(fm, "fragment_edit_name");	
-    		Log.d("Click View", "Just opened dialog for course entry");
-     }
-  
+
+		// do something
+		FragmentManager fm = getSupportFragmentManager();
+		CourseEntryDialog ceDialog = new CourseEntryDialog();
+		ceDialog.show(fm, "fragment_edit_name");	
+		Log.d("Click View", "Just opened dialog for course entry");
+	}
+
 
 
 
@@ -204,10 +232,17 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		updateView();
 	}
 	
+	
+	public void editCourse(int id ,String name, int credit, String grade){
+		db.updateCourse(id, name, credit, grade);
+		Log.d("ADDCourseActivity", "Activity is adding the courses from Dialog to the database");
+		updateView();	
+	}
+
 	public void removeCourse(){
 		
 	}
-		
+
 	public void updateView(){	
 		courses = db.getAllCourses();
 		Log.d("Update", "returned all courses");
@@ -223,7 +258,7 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		ca.notifyDataSetChanged();
 		Log.d("Load", "refreash array");
 		recalculateGPA();		
-		
+
 	}
 }
 
