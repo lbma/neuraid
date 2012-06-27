@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, PriorityToDoListActivity!</string>
+    <string name="app_name">Priority ToDo List</string>
+    <string name="TitleofActivity">Title of Activity</string>
+    <string name="description">Description</string>
+    <string name="priority">Priority</string>
+
+</resources>
