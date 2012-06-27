@@ -72,6 +72,7 @@ public class EditCourseEntryDialog extends DialogFragment {
 			// When Yes is Clicked it adds the new info the the Array List
 			public void onClick(View arg0) {
 				NeuroGPAActivity activity = (NeuroGPAActivity) getActivity();
+				// crash because can't pare int
 				activity.editCourse(c.getID(),mEditText.getText().toString(),Integer.parseInt(cEditText.getText().toString()),gradeData.getSelectedItem().toString());
 				
 				//(mEditText.getText().toString(),Integer.parseInt(cEditText.getText().toString()),gradeData.getSelectedItem().toString());
