@@ -6,9 +6,14 @@ import java.util.ArrayList;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -18,6 +23,7 @@ import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TableLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,7 +34,7 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 	private Button B1;
 	private ListView courseList;
 	private TextView gradeNumber;
-
+	
 	// Declares the array that will contain on the courses
 	private static ArrayList<Course> courses;
 	// Declares the Adapter
@@ -99,8 +105,8 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		B1 = (Button) findViewById(R.id.B1);
 		// Set up reaction when the Button to be pressed
 		B1.setOnClickListener(this);
-
-
+		
+		
 
 		// Initialize the ListView containing the courses and the Text containing the GPA in the main view
 		courseList = (ListView) findViewById(R.id.coursesArray);
@@ -127,7 +133,7 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				// TODO Auto-generated method stub
+				
 				FragmentManager fm2 = getSupportFragmentManager();
 				Course c = courses.get(position);
 				EditCourseEntryDialog eceDialog = new EditCourseEntryDialog(c);
@@ -260,6 +266,31 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		Log.d("Load", "refreash array");
 		recalculateGPA();		
 
+	}
+	public void deleteAll(){
+		deleteDatabase(db.getDatabaseName());
+		Log.d("DeleteAll", "All courses have been selected");
+		
+	}
+	
+	
+	public boolean onCreateOptionsMenu(Menu menu) {
+	    MenuInflater inflater = getMenuInflater();
+	    inflater.inflate(R.layout.main_activity, menu);
+	    return true;
+	}
+	
+	public boolean onOptionsItemSelected(MenuItem item) {
+	    switch (item.getItemId()) {
+	        case android.R.id.home:
+	            // app icon in action bar clicked; go home
+	            Intent intent = new Intent(this, HomeActivity.class);
+	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+	            startActivity(intent);
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
 	}
 }
 
