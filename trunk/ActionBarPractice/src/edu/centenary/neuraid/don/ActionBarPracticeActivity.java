@@ -16,7 +16,7 @@ import com.actionbarsherlock.app.SherlockFragmentActivity;
 
 
 
-public class ActionBarPracticetwoActivity extends SherlockFragmentActivity {
+public class ActionBarPracticeActivity extends SherlockFragmentActivity {
     /** Called when the activity is first created. */
     @Override
     public void onCreate(Bundle savedInstanceState) {
