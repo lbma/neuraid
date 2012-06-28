@@ -1,24 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="edu.centenary.neuraid.don"
-    android:versionCode="1"
-    android:versionName="1.0" >
+<manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="90" android:versionName="4.1.0" package="edu.centenary.neuraid.don">
 
-    <uses-sdk android:minSdkVersion="10" />
+    <uses-sdk android:minSdkVersion="7" android:targetSdkVersion="15"/>
 
-    <application
-        android:icon="@drawable/ic_launcher"
-        android:label="@string/app_name"
-        android:theme="@style/Theme.Sherlock.Light" >
-        <activity
-            android:name=".ActionBarPracticetwoActivity"
-            android:label="@string/app_name" >
+    <uses-feature android:name="android.hardware.touchscreen" android:required="false"/>
+    
+    
+
+    <application 
+        android:icon="@drawable/ic_launcher" 
+        android:label="@string/app_name">
+
+        
+        <activity 
+            android:label="@string/app_name" 
+            android:name="edu.centenary.neuraid.don.ActionBarPracticeActivity" 
+            android:theme="@style/Theme.Sherlock">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-    </application>
 
+
+       
+
+    </application>
 </manifest>
