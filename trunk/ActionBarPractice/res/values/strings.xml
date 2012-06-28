@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, ActionBarPracticetwoActivity!</string>
+    <string name="app_name">ActionBarPracticetwo</string>
+     <string name="course">Name of Course</string>
+    <string name="credit">Credits</string>
+    <string-array name="grade">
+        <item>"A"</item>
+        <item>"B"</item>
+        <item>"C"</item>
+        <item>"D"</item>
+        <item>"F"</item>
+    </string-array>
+    <string name="more">Add Courses</string>
+    <string name="GPA">GPA</string>
+    <string name="Cancel">Cancel</string>
+    <string name="Submit">Submit</string>
+    <string name="gpanumber">gpanumber</string>
+    <string name="classes">Class</string>
+    
+
+</resources>
