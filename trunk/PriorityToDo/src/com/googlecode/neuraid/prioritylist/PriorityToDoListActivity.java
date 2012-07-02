@@ -2,25 +2,34 @@ package com.googlecode.neuraid.prioritylist;
 
 import java.util.ArrayList;
 import java.util.Collections;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuInflater;
+import com.actionbarsherlock.view.MenuItem;
+
+
+
+import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
-import android.view.View.OnClickListener;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView.OnItemClickListener;
+import android.widget.AdapterView.OnItemLongClickListener;
 
 
-public class PriorityToDoListActivity extends FragmentActivity implements OnClickListener {
+public class PriorityToDoListActivity extends SherlockFragmentActivity {
 	// Data Members
 	private ListView activityList;
-	private Button add;
 	private ArrayList<YourActivity> activities;
 
 	private ActivityAdapter aa;
@@ -76,15 +85,12 @@ public class PriorityToDoListActivity extends FragmentActivity implements OnClic
 		// Constructorish
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.main);
-		
+
 		db = new DatabaseHandler(this);
 		Log.d("Create", "implemented databasehandler");
 
 		activityList = (ListView)findViewById(R.id.activityList);
-		add = (Button)findViewById(R.id.addButton);
-		add.setText("Add Activity");
-		add.setOnClickListener(this);
-
+		
 		// Initialize the array containing the activity into a variable
 		activities = new ArrayList<YourActivity>();
 		/*activities.add(new YourActivity("English101","A",4));
@@ -94,8 +100,44 @@ public class PriorityToDoListActivity extends FragmentActivity implements OnClic
 
 		aa = new ActivityAdapter(this,R.layout.row,activities);
 		activityList.setAdapter(aa);
+		activityList.setOnItemClickListener(new OnItemClickListener(){
+
+			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+
+				FragmentManager fm2 = getSupportFragmentManager();
+				YourActivity c = activities.get(position);
+				EditActivityEntryDialog eceDialog = new EditActivityEntryDialog(c);
+
+				eceDialog.show(fm2, "fragment_edit_name");	
+				Log.d("Click View", "Just opened dialog to edit course entries");
+
+
+				Log.d("Click", "Selected " + position);
+			}
+
+		}
+
+				);
+		Log.d("Create", "set adapter");
+
+		activityList.setOnItemLongClickListener(new OnItemLongClickListener(){
+			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position,
+					long arg3) {
+				FragmentManager fm3 = getSupportFragmentManager();
+				YourActivity d = activities.get(position);
+				DeleteActivityDialog dcDialog = new DeleteActivityDialog(d);
+				dcDialog.show(fm3, "fragment_edit_name");
+				return true;
+			}
+		});
+
 		updateView();
 
+	}
+	public void onResume() {
+		super.onResume();
+		Log.d("onResume","Just Resumed");
 	}
 
 	public void onClick(View arg0) {
@@ -109,7 +151,7 @@ public class PriorityToDoListActivity extends FragmentActivity implements OnClic
 		// Creates a ne object called Course and adds it to the array
 		db.addActivity(titleofactivity, description, priority);
 		Log.d("ADDCourseActivity", "Activity is adding the courses from Dialog to the database");
-		
+
 		// Refreshes the ListView containing the courses in the view via the adapter
 		aa.notifyDataSetChanged();
 		updateView();
@@ -134,16 +176,47 @@ public class PriorityToDoListActivity extends FragmentActivity implements OnClic
 
 		activityList.setAdapter(aa);
 		Log.d("Update", "set adapter");
-		
+
 		Collections.sort(activities);
-		
+
 		aa.notifyDataSetChanged();
 		Log.d("Load", "refreash array");
-				
+
+	}
+	public void deleteAll(){
+		deleteDatabase(db.getDatabaseName());
+		Log.d("DeleteAll", "All courses have been selected");
 
 	}
 
+	// Action Bar
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.main_activity, menu);
 
+		//		menu.add("Add Activity")
+		//		.setIcon(R.drawable.contentnew)
+		//		.setShowAsAction(MenuItem.SHOW_AS_ACTION_IF_ROOM);
+
+
+		return true;
 	}
+
+	// Action Bar Items
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch (item.getItemId()) {
+		case R.id.add_activity:
+			// app icon in action bar clicked; go home
+			FragmentManager fm = getSupportFragmentManager();
+			ActivityEntryDialog ceDialog = new ActivityEntryDialog();
+			ceDialog.show(fm, "fragment_edit_name");	
+			Log.d("Click View", "Just opened dialog for course entry");
+			return true;
+		default:
+			return super.onOptionsItemSelected(item);
+		}
+	}
+
+}
 
 
