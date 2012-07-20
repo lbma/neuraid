@@ -158,15 +158,16 @@
             android:layout_marginTop="10px"
             android:layout_weight="0.03"
             title="A Simple XYPlot Example" />
-
+
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/connect"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
             android:background="@drawable/custom_button"
             android:onClick="doStuff"
             android:text="Find Headset" />
+
     </LinearLayout>
 
 </FrameLayout>

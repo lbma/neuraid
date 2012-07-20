@@ -145,7 +145,7 @@ public class TestingEEGActivity extends Activity {
 		tv1b = (TextView)findViewById(R.id.blinkView6);
 		
 
-		b = (Button)findViewById(R.id.button1);
+		b = (Button)findViewById(R.id.connect);
 		b.setTextSize(TypedValue.COMPLEX_UNIT_SP, 18);
 
 		//iv = (ImageView)findViewById(R.id.background);
