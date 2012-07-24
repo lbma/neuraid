@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item android:id="@+id/removecourses"
+        android:title="Remove All Courses"
+        android:icon="@drawable/contentremove"
+        android:orderInCategory="101"
+        android:showAsAction="ifRoom|withText"/>
+</menu>

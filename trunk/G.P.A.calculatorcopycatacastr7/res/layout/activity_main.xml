@@ -1,0 +1,34 @@
+<TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/TableLayout1"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/decay" >
+
+    <ListView
+        android:id="@+id/courseList"
+        android:layout_width="wrap_content"
+        android:layout_height="263dp"
+        android:layout_weight="1.19"
+        android:background="@color/smog" >
+
+    </ListView>
+
+    <TableRow
+        android:id="@+id/tableRow1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <Button
+            android:id="@+id/calculategpa"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.20"
+            android:background="@drawable/custom_button"
+            android:text="Calculate"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="@color/black" />
+
+    </TableRow>
+
+</TableLayout>
