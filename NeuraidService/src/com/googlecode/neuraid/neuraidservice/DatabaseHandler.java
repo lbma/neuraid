@@ -2,7 +2,6 @@ package com.googlecode.neuraid.neuraidservice;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -39,6 +38,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 				+ KEY_ID + " INTEGER PRIMARY KEY," + KEY_TYPE + " TEXT,"
 				+ KEY_VALUE + " INTEGER," + KEY_TIME + " TEXT" + ")";
 		db.execSQL(CREATE_TABLE);
+		Log.d("OnClickDH", "table created");
+		
 	}
 
 	// Upgrading database
@@ -70,68 +71,42 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 		db.close(); // Closing database connection
 	}
 
-//	// Getting single contact
-//	Contact getContact(int id) {
-//		SQLiteDatabase db = this.getReadableDatabase();
-//
-//		Cursor cursor = db.query(TABLE, new String[] { KEY_ID,
-//				KEY_TYPE, KEY_VALUE, KEY_TIME }, KEY_ID + "=?",
-//				new String[] { String.valueOf(id) }, null, null, null, null);
-//		if (cursor != null)
-//			cursor.moveToFirst();
-//
-//		Contact contact = new Contact(Integer.parseInt(cursor.getString(0)),
-//				cursor.getString(1), cursor.getString(2));
-//		// return contact
-//		return contact;
-//	}
-//	
-//	// Getting All Contacts
-//	public List<Contact> getAllContacts() {
-//		List<Contact> contactList = new ArrayList<Contact>();
-//		// Select All Query
-//		String selectQuery = "SELECT  * FROM " + TABLE_CONTACTS;
-//
-//		SQLiteDatabase db = this.getWritableDatabase();
-//		Cursor cursor = db.rawQuery(selectQuery, null);
-//
-//		// looping through all rows and adding to list
-//		if (cursor.moveToFirst()) {
-//			do {
-//				Contact contact = new Contact();
-//				contact.setID(Integer.parseInt(cursor.getString(0)));
-//				contact.setName(cursor.getString(1));
-//				contact.setPhoneNumber(cursor.getString(2));
-//				// Adding contact to list
-//				contactList.add(contact);
-//			} while (cursor.moveToNext());
-//		}
-//
-//		// return contact list
-//		return contactList;
-//	}
-//
-//	// Updating single contact
-//	public int updateContact(Contact contact) {
-//		SQLiteDatabase db = this.getWritableDatabase();
-//
-//		ContentValues values = new ContentValues();
-//		values.put(KEY_NAME, contact.getName());
-//		values.put(KEY_PH_NO, contact.getPhoneNumber());
-//
-//		// updating row
-//		return db.update(TABLE_CONTACTS, values, KEY_ID + " = ?",
-//				new String[] { String.valueOf(contact.getID()) });
-//	}
-//
-//	// Deleting single contact
-//	public void deleteContact(Contact contact) {
-//		SQLiteDatabase db = this.getWritableDatabase();
-//		db.delete(TABLE_CONTACTS, KEY_ID + " = ?",
-//				new String[] { String.valueOf(contact.getID()) });
-//		db.close();
-//	}
 
+	// Getting All UserData 
+	public String getAllData() {
+		//ArrayList<Userdata> userdataList = new ArrayList<Userdata>();
+		// Select All Query
+		String selectQuery = "SELECT  * FROM " + TABLE;
+		Log.d("Database Query","selecting all from the query");
+
+
+		SQLiteDatabase db = this.getWritableDatabase();
+		Cursor cursor = db.rawQuery(selectQuery, null);
+		String userdates = "";
+		// looping through all rows and adding to list
+		if (cursor.moveToFirst()) {
+			do {
+				userdates += Integer.parseInt(cursor.getString(0)) + "," + cursor.getString(1) + "," + cursor.getInt(2) + "," + cursor.getLong(3) + "\n";
+//				Userdata userdata = new Userdata();
+//				userdata.setId(Integer.parseInt(cursor.getString(0)));
+//				userdata.setType(cursor.getString(1));
+//				userdata.setValue(cursor.getInt(2));
+//				userdata.setTime(cursor.getLong(3));
+
+				// Adding contact to list
+				//userdataList.add(userdata);
+			} while (cursor.moveToNext());
+		}
+		
+//		for (int i = 1; i < this.getCount(); i++){
+//			 userdatas += userdataList;
+//			Log.d("forloop", userdatas);
+//		}
+		// return data list
+		return userdates;
+	}
+	
+	
 
 	// Getting contacts Count
 	public int getCount() {

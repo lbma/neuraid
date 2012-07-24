@@ -16,6 +16,9 @@ import android.os.Handler;
 import android.os.IBinder;
 import android.os.Message;
 import android.util.Log;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.Toast;
 
 /**
@@ -28,6 +31,8 @@ public class NeuraidService extends Service {
 	final boolean rawEnabled = true;
 	private BluetoothAdapter bluetoothAdapter;
 	private DatabaseHandler db;
+	
+	
 
 
 	@Override
@@ -46,6 +51,7 @@ public class NeuraidService extends Service {
 		Toast.makeText(this, "Creating the Neuraid Service", Toast.LENGTH_SHORT).show();
 
 		bluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
+		
 		if(bluetoothAdapter == null) {
 			// Alert user that Bluetooth is not available
 			Toast.makeText(this, "Bluetooth not available", Toast.LENGTH_LONG).show();
@@ -54,12 +60,15 @@ public class NeuraidService extends Service {
 			foundbluetooth = true;
 			tgDevice = new TGDevice(bluetoothAdapter, handler);
 		}  
+		
 		db = new DatabaseHandler(this);
 		 /**
         * CRUD Operations
         * */
        // Inserting Headset Data
 		Log.d("Insert: ", "Inserting ..");
+		
+		
 		
 	}
 
@@ -177,5 +186,7 @@ public class NeuraidService extends Service {
 			}
 		}
 	};
+
+
 
 }
