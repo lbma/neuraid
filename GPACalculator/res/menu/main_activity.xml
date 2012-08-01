@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:id="@+id/menu_save"
-          android:icon="@drawable/ic_launcher"
-          android:title="menu_save"
+    <item android:id="@+id/add_course"
+          android:icon="@drawable/contentnew"
+          android:title="Add Course"
           android:showAsAction="ifRoom|withText" />
 </menu>

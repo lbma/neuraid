@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 public class CourseEntryDialog extends DialogFragment {
@@ -55,6 +56,11 @@ public class CourseEntryDialog extends DialogFragment {
 		yes.setOnClickListener(new OnClickListener() {
 			// When Yes is Clicked it adds the new info the the Array List
 			public void onClick(View arg0) {
+				
+				if (mEditText.getText().toString().equals("") || cEditText.getText().toString().equals("")){
+					Toast.makeText(getActivity(),"Don't Leave Anything Blank",Toast.LENGTH_LONG).show();
+				}else{
+					
 				NeuroGPAActivity activity = (NeuroGPAActivity) getActivity();
 				activity.addCourse(mEditText.getText().toString(),Integer.parseInt(cEditText.getText().toString()),gradeData.getSelectedItem().toString());
 				Log.d("onClick Dialog", "sendng data to activity file");
@@ -62,6 +68,7 @@ public class CourseEntryDialog extends DialogFragment {
 				// Makes the add course Dialog Box disappear
 				CourseEntryDialog.this.dismiss();
 				Log.d("onClick Dialog", "Course Entry Dialog dismissed");
+			}
 
 			}
 
