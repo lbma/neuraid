@@ -62,6 +62,10 @@ public class NeuraidService extends Service {
 		}  
 		
 		db = new DatabaseHandler(this);
+		
+
+
+			
 		 /**
         * CRUD Operations
         * */
@@ -121,7 +125,7 @@ public class NeuraidService extends Service {
 					break;
 				case TGDevice.STATE_CONNECTING:		                	
 
-					//tvcs.setText("Connecting...");
+					//NeuraidServiceActivity.connect.setText("Connecting...");
 					//tv.append("Connecting...\n");
 					break;		                    
 				case TGDevice.STATE_CONNECTED:
@@ -145,7 +149,11 @@ public class NeuraidService extends Service {
 				break;
 			case TGDevice.MSG_POOR_SIGNAL:
 				//signal = msg.arg1;
-
+				Log.d("TGDevice", "Signal = " + msg.arg1);
+//				if (msg.arg1 != 0){
+//					Toast.makeText(getApplicationContext(), "Signal = " + msg.arg1 , Toast.LENGTH_SHORT).show();
+//				}
+				
 				//tv.append("PoorSignal: " + msg.arg1 + "\n");
 				break;
 			case TGDevice.MSG_RAW_DATA:	  
@@ -160,11 +168,11 @@ public class NeuraidService extends Service {
 				db.addData("Attention", msg.arg1, System.currentTimeMillis());
 				//att = msg.arg1;
 				//tv.append("Attention: " + msg.arg1 + "\n");
-				//Log.v("HelloA", "Attention: " + att + "\n");
+				Log.d("TGDevice", "Attention = " + msg.arg1);
 				break;
 			case TGDevice.MSG_MEDITATION:
 				db.addData("Meditation", msg.arg1, System.currentTimeMillis());
-				Log.d("Neuraid Service", "Meditaion = "+  msg.arg1);
+				Log.d("TGDevice", "Meditaion = "+  msg.arg1);
 				//data.setY(msg.arg1);
 				//tv.append("Meditation:" + msg.arg1 + "\n"); 
 				break;

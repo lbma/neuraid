@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.widget.Button;
+import android.widget.Toast;
 
 public class DeleteCourseDialog extends DialogFragment {
 	
@@ -41,6 +42,7 @@ public class DeleteCourseDialog extends DialogFragment {
 				NeuraidServiceActivity activity = (NeuraidServiceActivity) getActivity();
 				
 				activity.deleteAll();
+				Toast.makeText(activity, "All Data Wiped", Toast.LENGTH_LONG).show();
 
 				DeleteCourseDialog.this.dismiss();
 			}
