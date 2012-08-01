@@ -82,7 +82,7 @@
             android:width="300dip" />
 
     </LinearLayout>
-
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content" >
@@ -93,13 +93,20 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Send" />
-
+
         <Button
             android:id="@+id/connect"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Connect" />
+
+        <Button
+            android:id="@+id/disconnect"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Disconnect" />
 
         <Button
             android:id="@+id/wipealldatabutton"

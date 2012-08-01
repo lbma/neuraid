@@ -14,6 +14,7 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class NeuraidServiceActivity extends FragmentActivity {
@@ -26,6 +27,10 @@ public class NeuraidServiceActivity extends FragmentActivity {
 	private TextView emailtext;
 	private Button wipealldatabutton;
 	private Button connect;
+	private Button disconnect;
+	private boolean connected;
+
+	
 
 
 	@Override
@@ -34,6 +39,8 @@ public class NeuraidServiceActivity extends FragmentActivity {
 		
 		this.setContentView(R.layout.main);
 		Log.d("Create", "set content view to main.xml");
+		
+		connected = false;
 
 		db = new DatabaseHandler(this);
 		sendemailb = (Button)findViewById(R.id.emailsendbutton);
@@ -88,8 +95,28 @@ public class NeuraidServiceActivity extends FragmentActivity {
 
 		NeuraidServiceActivity.this.startService(start);
 		Log.d("Create", "Service started");
+		
+		connected = true;
+		
 
 			}});
+		
+		disconnect = (Button) findViewById(R.id.disconnect);
+		disconnect.setOnClickListener(new OnClickListener(){
+
+			public void onClick(View arg0) {
+				// TODO Auto-generated method stub
+				
+				if (connected == false){
+					Toast.makeText(getApplicationContext(),"Service Not Started", Toast.LENGTH_LONG).show();
+				} else {
+				onDestroy();
+				connected = false;
+				Toast.makeText(getApplicationContext(),"Service Stopped",Toast.LENGTH_LONG).show();
+				}
+			}
+			
+		});
 		
 	}
 
