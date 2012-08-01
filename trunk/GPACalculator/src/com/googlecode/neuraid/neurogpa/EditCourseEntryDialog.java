@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 
 public class EditCourseEntryDialog extends DialogFragment {
@@ -71,6 +72,9 @@ public class EditCourseEntryDialog extends DialogFragment {
 		yes.setOnClickListener(new OnClickListener() {
 			// When Yes is Clicked it adds the new info the the Array List
 			public void onClick(View arg0) {
+				if (mEditText.getText().toString().equals("") || cEditText.getText().toString().equals("")){
+					Toast.makeText(getActivity(),"Don't Leave Anything Blank",Toast.LENGTH_LONG).show();
+				}else{
 				NeuroGPAActivity activity = (NeuroGPAActivity) getActivity();
 				// crash because can't pare int
 				activity.editCourse(c.getID(),mEditText.getText().toString(),Integer.parseInt(cEditText.getText().toString()),gradeData.getSelectedItem().toString());
@@ -82,6 +86,7 @@ public class EditCourseEntryDialog extends DialogFragment {
 				EditCourseEntryDialog.this.dismiss();
 				Log.d("onClick Dialog", "Course Entry Dialog dismissed");
 
+			}
 			}
 
 		});

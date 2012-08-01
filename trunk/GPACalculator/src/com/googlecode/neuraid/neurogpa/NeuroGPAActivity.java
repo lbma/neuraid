@@ -3,17 +3,18 @@ package com.googlecode.neuraid.neurogpa;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import android.support.v4.app.FragmentActivity;
+
+import com.actionbarsherlock.app.SherlockFragmentActivity;
+import com.actionbarsherlock.view.Menu;
+import com.actionbarsherlock.view.MenuItem;
+import com.actionbarsherlock.view.MenuInflater;
+
 import android.support.v4.app.FragmentManager;
 import android.content.Context;
-import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
@@ -22,19 +23,18 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
-import android.widget.TableLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 
-public class NeuroGPAActivity extends FragmentActivity implements OnClickListener{
+public class NeuroGPAActivity extends SherlockFragmentActivity {
 
 	// Data Members
-	private Button B1;
+
 	private ListView courseList;
 	private TextView gradeNumber;
-	
+
 	// Declares the array that will contain on the courses
 	private static ArrayList<Course> courses;
 	// Declares the Adapter
@@ -82,7 +82,7 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 				if(bt != null){
 					bt.setText("" + o.getGrade());
 				}
-						
+
 			}
 			return v;
 		}
@@ -101,17 +101,11 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		db = new DatabaseHandler(this);
 		Log.d("Create", "implemented databasehandler");
 
-		// Initialize a Button 
-		B1 = (Button) findViewById(R.id.B1);
-		// Set up reaction when the Button to be pressed
-		B1.setOnClickListener(this);
-		
-		
 
 		// Initialize the ListView containing the courses and the Text containing the GPA in the main view
 		courseList = (ListView) findViewById(R.id.coursesArray);
 		gradeNumber = (TextView) findViewById(R.id.gpanumber);
-		
+
 		//courseDB = new CourseDB(this);
 
 		// Initialize the array containing the courses into a variable
@@ -133,23 +127,23 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 
 			public void onItemClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
-				
+
 				FragmentManager fm2 = getSupportFragmentManager();
 				Course c = courses.get(position);
 				EditCourseEntryDialog eceDialog = new EditCourseEntryDialog(c);
-				
+
 				eceDialog.show(fm2, "fragment_edit_name");	
 				Log.d("Click View", "Just opened dialog to edit course entries");
-				
-				
+
+
 				Log.d("Click", "Selected " + position);
 			}
-			
+
 		}
-		
-		);
+
+				);
 		Log.d("Create", "set adapter");
-		
+
 		courseList.setOnItemLongClickListener(new OnItemLongClickListener(){
 			public boolean onItemLongClick(AdapterView<?> arg0, View arg1, int position,
 					long arg3) {
@@ -237,8 +231,8 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		Log.d("ADDCourseActivity", "Activity is adding the courses from Dialog to the database");
 		updateView();
 	}
-	
-	
+
+
 	public void editCourse(int id ,String name, int credit, String grade){
 		db.updateCourse(id, name, credit, grade);
 		Log.d("ADDCourseActivity", "Activity is adding the courses from Dialog to the database");
@@ -264,33 +258,51 @@ public class NeuroGPAActivity extends FragmentActivity implements OnClickListene
 		Log.d("Update", "recalculate GPA");
 		ca.notifyDataSetChanged();
 		Log.d("Load", "refreash array");
-		recalculateGPA();		
+	
 
 	}
 	public void deleteAll(){
-		deleteDatabase(db.getDatabaseName());
+		
+			SQLiteDatabase db2 = db.getWritableDatabase();
+		    db2.delete(DatabaseHandler.TABLE_COURSES, null, null);
+		    db2.close();
+		    updateView();
+
+		    
+
 		Log.d("DeleteAll", "All courses have been selected");
 		
+
 	}
-	
-	
+
+	// Action Bar
 	public boolean onCreateOptionsMenu(Menu menu) {
-	    MenuInflater inflater = getMenuInflater();
-	    inflater.inflate(R.layout.main_activity, menu);
-	    return true;
+		MenuInflater inflater = getSupportMenuInflater();
+		inflater.inflate(R.menu.main_activity, menu);
+		inflater.inflate(R.menu.remove_courses, menu);
+		return true;
 	}
-	
+
+	// Action Bar Items
 	public boolean onOptionsItemSelected(MenuItem item) {
-	    switch (item.getItemId()) {
-	        case android.R.id.home:
-	            // app icon in action bar clicked; go home
-	            Intent intent = new Intent(this, HomeActivity.class);
-	            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-	            startActivity(intent);
-	            return true;
-	        default:
-	            return super.onOptionsItemSelected(item);
-	    }
+		switch (item.getItemId()) {
+		case R.id.add_course:
+			// app icon in action bar clicked; go home
+			FragmentManager fm = getSupportFragmentManager();
+			CourseEntryDialog ceDialog = new CourseEntryDialog();
+			ceDialog.show(fm, "fragment_edit_name");	
+			Log.d("Click View", "Just opened dialog for course entry");
+			return true;
+		case R.id.remove_courses:
+			FragmentManager fm1 = getSupportFragmentManager();
+			DeleteAllCoursesDialog racd = new DeleteAllCoursesDialog();
+			racd.show(fm1, "framgent_edit_name");
+			Log.d("Click View", "Just opened dialog for all course removel");
+
+			
+		default:
+			return super.onOptionsItemSelected(item);
+		}
 	}
 }
 
